@@ -6,7 +6,6 @@ import time
 from os.path import basename
 from os.path import exists
 
-
 start_time = time.time()
 
 alphabet = string.ascii_lowercase
