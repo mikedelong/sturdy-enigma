@@ -6,13 +6,11 @@ import time
 from os.path import basename
 from os.path import exists
 
-import tensorflow as tf
 
 start_time = time.time()
 
 alphabet = string.ascii_lowercase
 suffix = '.py'
-do_tensorflow = False
 if __name__ == '__main__':
     formatter = logging.Formatter('%(asctime)s : %(name)s :: %(levelname)s : %(message)s')
     logger = logging.getLogger('main')
@@ -62,10 +60,6 @@ if __name__ == '__main__':
     logger.debug('new settings file name is %s' % new_settings_file)
     with open(new_settings_file, 'w') as output_fp:
         json.dump(new_settings, output_fp)
-
-    if do_tensorflow:
-        with tf.Session() as session:
-            session.run(tf.global_variables_initializer())
 
     logger.debug('done')
     finish_time = time.time()
