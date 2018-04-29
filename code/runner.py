@@ -27,6 +27,7 @@ if __name__ == '__main__':
         if script_file.endswith(suffix) and script_file not in do_not_run:
             logger.debug('we are running %s' % script_file)
             child = Popen([executable, script_file, '--username', 'root'])
+            child.wait()
 
 
     logger.debug('done')
