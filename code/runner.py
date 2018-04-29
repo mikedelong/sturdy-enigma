@@ -2,6 +2,8 @@ import logging
 import time
 from os import listdir
 from os.path import basename
+from subprocess import Popen
+from sys import executable
 
 start_time = time.time()
 
@@ -17,11 +19,15 @@ if __name__ == '__main__':
     logger.debug('started')
 
     base_file_name = basename(__file__)
+    logger.debug('we are running from %s' % base_file_name)
+    do_not_run = [base_file_name, '__init__.py']
+    logger.debug('our do not run list is %s' % do_not_run)
 
     for script_file in listdir('.'):
-        if script_file.endswith(suffix) and script_file != base_file_name:
+        if script_file.endswith(suffix) and script_file not in do_not_run:
             logger.debug('we are running %s' % script_file)
-            exec(open(script_file).read(), globals())
+            child = Popen([executable, script_file, '--username', 'root'])
+
 
     logger.debug('done')
     finish_time = time.time()
